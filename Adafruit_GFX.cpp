@@ -395,6 +395,33 @@ void Adafruit_GFX::drawPentagram(int16_t x0, int16_t y0,
 	drawLine(xd, yd, xe, ye, color);
 }
 
+// Draw a NewPentagram
+void Adafruit_GFX::drawNewPentagram(int16_t x0, int16_t y0,
+        int16_t r0, uint16_t color) {
+	int xa, ya;
+    int xb, yb;
+    int xc, yc;
+    int xd, yd;
+    int xe, ye;
+    xa = x0;
+    ya = y0 + r0;
+    xb = x0 - r0 * sin(PI / 180 * 18);
+    yb = y0 + r0 * -(cos(PI / 180 * 18));
+    xc = x0 - r0 * -(sin(PI / 180 * 54));
+    yc = y0 - r0 * -(cos(PI / 180 * 54));
+    xd = x0 + r0 * -(sin(PI / 180 * 54));
+    yd = y0 - r0 * -(cos(PI / 180 * 54));
+    xe = x0 + r0 * sin(PI / 180 * 18);
+    ye = y0 + r0 * -(cos(PI / 180 * 18));
+    drawLine(xa, ya, xc, yc, color);
+    drawLine(xa, ya, xd, yd, color);
+    drawLine(xb, yb, xc, yc, color);
+	drawLine(xb, yb, xe, ye, color);
+	drawLine(xd, yd, xe, ye, color);
+}
+
+
+
 // Draw a ellipse outline
 void Adafruit_GFX::drawEllipse(int16_t x1, int16_t y1, int16_t x2, int16_t y2, int16_t a, uint16_t color) {
     int16_t max_x = ((x1 > x2 ? x1 : x2) + a > 128 ? (x1 > x2 ? x1 : x2) + a : 128);
@@ -409,6 +436,44 @@ void Adafruit_GFX::drawEllipse(int16_t x1, int16_t y1, int16_t x2, int16_t y2, i
     }
     endWrite();
 }
+
+
+
+// Draw a Hexagram
+void Adafruit_GFX::drawHexagram(int16_t x0, int16_t y0, int16_t length, uint16_t color){
+    int xa, ya;
+    int xb, yb;
+    int xc, yc;
+    int xd, yd;
+    int xe, ye;
+    int xf, yf;
+    xa = x0;
+    ya = y0;
+
+    xb = x0 + length;
+    yb = y0;
+
+    xc = x0 + length / 2;
+    yc = y0 + length * (sin(PI / 180 * 60));
+
+    xd = x0 ;
+    yd = y0 + length * (tan(PI / 180 * 30));
+
+    xe = x0 + length / 2;
+    ye = y0 - length * (tan(PI / 180 * 30)) / 2;
+
+    xf = x0 + length;
+    yf = y0 + length * (tan(PI / 180 * 30));
+
+    drawLine(xa, ya, xb, yb, color);
+    drawLine(xa, ya, xc, yc, color);
+    drawLine(xb, yb, xc, yc, color);
+	drawLine(xd, yd, xe, ye, color);
+	drawLine(xd, yd, xf, yf, color);
+    drawLine(xe, ye, xf, yf, color);
+}
+
+
 
 
 // Draw a triangle
